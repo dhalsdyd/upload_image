@@ -1,10 +1,28 @@
-<h2>이미지 업로드하기</h2>
+<h2 class="Title">이미지 업로드하기</h2>
 <form action="/upload/image" enctype="multipart/form-data" method="post">
     <div>
         <label for="fieldPhoto">이미지</label>
-        <input type="file" required accept="image/*" name = "photo">
+        <img id = "img_section">
+        <input type="file" required accept="image/*" name = "photo" id = "input-image">
     </div>
     <div>
         <button type = 'submit'>업로드하기</button>
     </div>
 </form>
+
+{{#section 'scripts'}}
+    <script>
+        const reader = new FileReader();
+        reader.onload = (readerEvent) => {
+            document.querySelector("#img_section").setAttribute("src", readerEvent.target.result);
+            //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
+        };
+        document.querySelector("#input-image").addEventListener("change", (changeEvent) => {
+            //upload_file 에 이벤트리스너를 장착
+
+        const imgFile = changeEvent.target.files[0];
+        reader.readAsDataURL(imgFile);
+        //업로드한 이미지의 URL을 reader에 등록
+        })
+    </script>
+{{/section}}
