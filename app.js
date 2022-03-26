@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var expressHandlebars = require('express-handlebars')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -8,6 +9,19 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+
+app.engine('.hbs', expressHandlebars.engine({
+  extname: '.hbs',
+  defaultLayout: 'main',
+  helpers: {
+    section: function(name, options) {
+      if(!this._sections) this._sections = {}
+      this._sections[name] = options.fn(this)
+      return null
+    },
+  },
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
