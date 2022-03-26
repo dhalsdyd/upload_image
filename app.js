@@ -38,4 +38,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+const port = process.env.port || 3000
+
+if(require.main == module){
+  app.listen(port, ()=>{console.log("Started on.... Press Ctrl-C to terminate")})
+}
+
 module.exports = app;
