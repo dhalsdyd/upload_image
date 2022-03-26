@@ -55,7 +55,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-const port = process.env.port || 3000
+const port = process.env.PORT
 
 if(require.main == module){
   app.listen(port, ()=>{console.log("Started on.... Press Ctrl-C to terminate")})
